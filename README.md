@@ -12,7 +12,7 @@ Under development by Luis Naranjo <luisnaranjo733@gmail.com>
 + Server verifies credentials in a secure manner
 + Server welcomes the user or gives error message and shuts down connection
 
-If client is welcomed:
++ If client is welcomed:
     + Server will provide a list of online and offline users
     + Show last 5 lines of chat
     + Start chat session with everyone that is connected
