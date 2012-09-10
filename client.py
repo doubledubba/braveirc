@@ -1,14 +1,25 @@
 #!/usr/bin/env python
 
-''' Blank docstring. '''
+''' Brave Python IRC client
+
+# Algorithm
+1. Authenticate
+2. Start chatter
+'''
 
 from settings import *
 
+USERNAME = 'jnaranjo'
+PASSWORD = 'test'
+
+
 s.connect((HOST, PORT))
+# Start connection
 
-username = 'jnaranjo'
+auth_token = encode({'auth': {'username': USERNAME, 'password': PASSWORD}})
+send(s, auth_token)
 
-s.sendall(username)  # login
-reply = recvall(s, 1028)
-print 'The server said', repr(reply)
+
+
+# End connection
 s.close()

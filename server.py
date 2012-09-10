@@ -5,16 +5,32 @@
 from settings import *
 
 
+def login(token):
+    '''Authenticates user credentials.
+
+    Returns username if authenticated succesfully.'''
+
+    if not token: return
+    if 'auth' not in token: return
+
+    token = token['auth'] # nested dictionary - only one we need
+
+    if 'username' not in token or 'password' not in token: return
+
+    return token['username']
+
+
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 s.bind((HOST, PORT))
 s.listen(1)
 while True:
-    print 'Listening at', s.getsockname()
     sc, sockname = s.accept()
-    print 'We have accepted a connection from', sockname
-    print 'Socket connects', sc.getsockname(), 'and', sc.getpeername()
-    message = recvall(sc, 16)
-    print 'The incoming sixteen-octet message says', repr(message)
-    sc.sendall('Farewell, client')
+    token = recv(sc)
     sc.close()
-    print 'Reply sent, socket closed'
+
+    token = decode(token) or token
+    user = login(token)
+    if user:
+        print '%s has succesfully logged in.' % user
+    else:
+        print 'Unidentified user login failed.'
