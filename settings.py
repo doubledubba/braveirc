@@ -72,6 +72,11 @@ def encode(object):
         logger.critical(str(tb))
 
 
+def rdecode(sc):
+    response = recv(sc)
+    return decode(response)
+
+
 if __name__ == '__main__':
     print 'Host:', HOST
     print 'Port:', PORT

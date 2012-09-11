@@ -26,6 +26,9 @@ s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 s.bind((HOST, PORT))
 s.listen(1)
 
+def search(client):
+    if client.is_alive():
+        return client.username
 
 
 class Client(threading.Thread):
@@ -54,11 +57,12 @@ class Client(threading.Thread):
 
     def execute(self, command):
         logger.debug('Issuing the "%s" command.' % command)
-        if command == 'logged in':
-            if self.authenticated:
-                self.send('Yes')
-            else:
-                self.send('No')
+
+        if command == 'online users':
+            online = [client.username for client in clients if
+                    client.is_alive()]
+            response = encode(dict(online=online))
+            self.send(response)
 
 
     def run(self):
@@ -66,10 +70,12 @@ class Client(threading.Thread):
 
         if not self.login():
             logger.warning('Failed auth from %s' % str(self.sockname))
-            self.send('') # so the recv on the other side doesn't hang
+            response = encode(dict(auth=False))
+            self.send(response)
             return
         else:
-            self.send('yes')
+            response = encode(dict(auth=True))
+            self.send(response)
 
         while True:
             try:
