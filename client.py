@@ -53,7 +53,5 @@ pprint(online.get('online'))
 
 # start chatter
 
-
-
 # End connection
 die()
