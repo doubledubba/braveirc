@@ -38,6 +38,7 @@ class Client(threading.Thread):
         self.username = ''
         self.send = partial(send, sc)
         self.recv = partial(recv, sc)
+        self.rdecode = partial(rdecode, sc)
         self.close = self.sc.close
         threading.Thread.__init__(self)
 
@@ -61,7 +62,7 @@ class Client(threading.Thread):
         if command == 'online users':
             online = [client.username for client in clients if
                     client.is_alive()]
-            response = encode(dict(online=online))
+            response = dictencode(online=online)
             self.send(response)
 
 
@@ -70,7 +71,7 @@ class Client(threading.Thread):
 
         if not self.login():
             logger.warning('Failed auth from %s' % str(self.sockname))
-            response = encode(dict(auth=False))
+            response = dictencode(auth=False)
             self.send(response)
             return
         else:
@@ -79,8 +80,7 @@ class Client(threading.Thread):
 
         while True:
             try:
-                request = self.recv()
-                request = decode(request)
+                request = self.rdecode()
                 logger.debug('Request: %s' % request)
                 if isinstance(request, dict):
                     command = request.get('command')

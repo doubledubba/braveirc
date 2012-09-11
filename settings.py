@@ -80,6 +80,12 @@ def rdecode(sc, get=None):
     return response
 
 
+def dictencode(**kwargs):
+    raw = dict(**kwargs)
+    return encode(raw)
+
+
+
 if __name__ == '__main__':
     print 'Host:', HOST
     print 'Port:', PORT

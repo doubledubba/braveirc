@@ -49,5 +49,11 @@ print 'Online users:'
 pprint(online.get('online'))
 
 
+# get recent chat
+
+# start chatter
+
+
+
 # End connection
 die()
