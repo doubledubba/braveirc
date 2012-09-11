@@ -3,32 +3,26 @@
 ''' Blank docstring. '''
 
 import threading
+import os
+import sqlite3
 from functools import partial
 from settings import *
 
+DB = os.path.join(os.path.dirname(__file__), 'braveirc.db')
+DB = os.path.abspath(DB)
+if not os.path.isfile(DB):
+    open(DB, 'a')
 
-def login(token):
-    '''Authenticates user credentials.
+conn = sqlite3.connect(DB, check_same_thread=False)
+cur = conn.cursor()
+cur.execute('create table if not exists users (username VARCHAR(255), password'
+        ' VARCHAR(255))')
 
-    Returns username if authenticated succesfully.'''
-
-    if not token: return
-    if 'auth' not in token: return
-
-    token = token['auth'] # nested dictionary - only one we need
-
-    if 'username' not in token or 'password' not in token: return
-
-    return token['username']
-
+conn.commit()
 
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 s.bind((HOST, PORT))
 s.listen(1)
-
-def search(client):
-    if client.is_alive():
-        return client.username
 
 
 class Client(threading.Thread):
@@ -50,7 +44,9 @@ class Client(threading.Thread):
         password = auth.get('password')
         if not username or not password: return
 
-        self.authenticated = True
+        spassword = cur.execute('select password from users where username = ?',
+                (username,)).fetchone()[0]
+        self.authenticated = True if spassword == password else False
         if self.authenticated:
             logger.info('Authenticated: %s' % username)
             self.username = username
@@ -110,4 +106,14 @@ try:
 except KeyboardInterrupt:
     print 'Clients:', clients
 
+
+def addUser(username, password):
+    cur.execute('insert into users (username, password) values (?, ?)',
+            (username, password))
+    conn.commit()
+
+
+def showUsers():
+    for row in cur.execute('select * from users'):
+        print row
 
