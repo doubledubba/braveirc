@@ -47,12 +47,13 @@ def recv(sc):
 
 
 def query(method, *dicts):
-    request = {method: {}}
+    request = {method if dicts else 'command': {} if dicts else method}
     for dictionary in dicts:
         for key in dictionary:
             request[method][key] = dictionary[key]
 
     return encode(request)
+
 
 def decode(string):
     '''Parses a JSON string into a python object.'''

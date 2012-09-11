@@ -10,6 +10,7 @@
 5. Client enters chatterloop
 '''
 
+from functools import partial
 from settings import *
 
 credentials = {'username': 'jnaranjo', 'password': 'test'}
@@ -17,12 +18,19 @@ credentials = {'username': 'jnaranjo', 'password': 'test'}
 
 
 s.connect((HOST, PORT))
+send = partial(send, s)
+recv = partial(recv, s)
 # Start connection
 
-auth_token = query('auth', credentials)
-send(s, auth_token)
+## authenticate
+auth_token = query('auths', credentials)
+send(auth_token)
+authenticated = recv()
+if authenticated:
+    print authenticated
 
-send(s, 'hallo')
+
+
 
 # End connection
 s.close()
