@@ -20,6 +20,5 @@ auth_token = encode({'auth': {'username': USERNAME, 'password': PASSWORD}})
 send(s, auth_token)
 
 
-
 # End connection
 s.close()

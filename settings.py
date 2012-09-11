@@ -42,23 +42,32 @@ def encode(object):
         logger.critical(str(tb))
 
 
-def send(s, msg):
+def send(sc, msg):
     '''Sends a message to the server after sending a length header'''
     length = str(len(msg)).zfill(4)
     if len(length) > 4:
         raise ValueError('The message can\'t be longer than 9999 bytes!')
 
-    s.send(length)
-    s.sendall(msg)
+    sc.sendall(length)
+    sc.sendall(msg)
 
 
 def recv(sc):
     msg_length = sc.recv(4)
     if not msg_length.isalnum():
+        print msg_length
         raise ValueError('Invalid message length header!')
     msg_length = int(msg_length)
-    msg = sc.recv(msg_length)
-    return msg
+
+    received = ''
+    while len(received) < msg_length:
+        chunk = sc.recv(msg_length)
+        if not chunk:
+            raise RuntimeError('Socket closed %d bytes into the message!' %
+                    len(received))
+        received += chunk
+
+    return received
 
 if __name__ == '__main__':
     print 'Host:', HOST
