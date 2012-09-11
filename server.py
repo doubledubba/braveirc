@@ -4,6 +4,7 @@
 
 import threading
 import os
+import hashlib
 import sqlite3
 from functools import partial
 from settings import *
@@ -12,6 +13,8 @@ DB = os.path.join(os.path.dirname(__file__), 'braveirc.db')
 DB = os.path.abspath(DB)
 if not os.path.isfile(DB):
     open(DB, 'a')
+
+digest = lambda password: hashlib.md5(password).hexdigest()
 
 conn = sqlite3.connect(DB, check_same_thread=False)
 cur = conn.cursor()
@@ -46,7 +49,7 @@ class Client(threading.Thread):
 
         spassword = cur.execute('select password from users where username = ?',
                 (username,)).fetchone()[0]
-        self.authenticated = True if spassword == password else False
+        self.authenticated = True if spassword == digest(password) else False
         if self.authenticated:
             logger.info('Authenticated: %s' % username)
             self.username = username
@@ -108,6 +111,7 @@ except KeyboardInterrupt:
 
 
 def addUser(username, password):
+    password = digest(password)
     cur.execute('insert into users (username, password) values (?, ?)',
             (username, password))
     conn.commit()
@@ -116,4 +120,5 @@ def addUser(username, password):
 def showUsers():
     for row in cur.execute('select * from users'):
         print row
+
 
