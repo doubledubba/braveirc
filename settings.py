@@ -72,9 +72,12 @@ def encode(object):
         logger.critical(str(tb))
 
 
-def rdecode(sc):
+def rdecode(sc, get=None):
     response = recv(sc)
-    return decode(response)
+    response = decode(response)
+    if get:
+        response = response.get(get)
+    return response
 
 
 if __name__ == '__main__':

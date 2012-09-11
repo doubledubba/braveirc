@@ -34,8 +34,7 @@ rdecode = partial(rdecode, s)
 ## authenticate
 auth_token = query('auth', credentials)
 send(auth_token)
-auth = rdecode()
-auth = auth.get('auth')
+auth = rdecode(get='auth')
 if not auth:
     logger.warning('Failed to authenticate!')
     die(exit=1)
