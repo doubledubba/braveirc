@@ -34,6 +34,7 @@ class Client(threading.Thread):
         self.username = ''
         self.send = partial(send, sc)
         self.recv = partial(recv, sc)
+        self.close = self.sc.close
         threading.Thread.__init__(self)
 
     def login(self):
@@ -46,23 +47,42 @@ class Client(threading.Thread):
 
         self.authenticated = True
         if self.authenticated:
-            print 'Authenticated:', username
+            logger.info('Authenticated: %s' % username)
             self.username = username
-
+            return True
 
     def run(self):
-        print 'Started connection from:', self.sockname
+        logger.debug('Started connection from: %s' %  str(self.sockname))
 
-        self.login() # if valid, sets self.username
+        if not self.login():
+            logger.warning('Failed auth from %s' % str(self.sockname))
+            #self.send('auth failed')
+            return
 
-        self.sc.close()
+        while True:
+            try:
+                self.recv()
+            except RuntimeError, tb:
+                logger.debug('Shutting down socket!')
+                break
+
+
+        self.close()
 
 clients = []
 
-while True:
-    connection = s.accept()
-    client = Client(*connection)
-    client.start()
-    clients.append(client)
+
+def mainLoop():
+    while True:
+        connection = s.accept()
+        client = Client(*connection)
+        client.start()
+        client.name = connection[1]
+        clients.append(client)
+
+try:
+    mainLoop()
+except KeyboardInterrupt:
+    print 'Clients:', clients
 
 

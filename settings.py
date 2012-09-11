@@ -25,6 +25,35 @@ def recvall(sock, length):
         data += more
     return data
 
+
+def send(sc, msg):
+    '''Sends a message to the server after sending a length header'''
+    length = str(len(msg)).zfill(4)
+    if len(length) > 4:
+        raise ValueError('The message can\'t be longer than 9999 bytes!')
+
+    sc.sendall(length)
+    sc.sendall(msg)
+
+
+def recv(sc):
+    msg_length = recvall(sc, 4)
+    if not msg_length.isalnum():
+        print msg_length
+        raise ValueError('Invalid message length header!')
+    msg_length = int(msg_length)
+
+    return recvall(sc, msg_length)
+
+
+def query(method, *dicts):
+    request = {method: {}}
+    for dictionary in dicts:
+        for key in dictionary:
+            request[method][key] = dictionary[key]
+
+    return encode(request)
+
 def decode(string):
     '''Parses a JSON string into a python object.'''
 
@@ -41,33 +70,6 @@ def encode(object):
     except ValueError, tb:
         logger.critical(str(tb))
 
-
-def send(sc, msg):
-    '''Sends a message to the server after sending a length header'''
-    length = str(len(msg)).zfill(4)
-    if len(length) > 4:
-        raise ValueError('The message can\'t be longer than 9999 bytes!')
-
-    sc.sendall(length)
-    sc.sendall(msg)
-
-
-def recv(sc):
-    msg_length = sc.recv(4)
-    if not msg_length.isalnum():
-        print msg_length
-        raise ValueError('Invalid message length header!')
-    msg_length = int(msg_length)
-
-    received = ''
-    while len(received) < msg_length:
-        chunk = sc.recv(msg_length)
-        if not chunk:
-            raise RuntimeError('Socket closed %d bytes into the message!' %
-                    len(received))
-        received += chunk
-
-    return received
 
 if __name__ == '__main__':
     print 'Host:', HOST
