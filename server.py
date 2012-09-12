@@ -48,7 +48,9 @@ class Client(threading.Thread):
         if not username or not password: return
 
         spassword = cur.execute('select password from users where username = ?',
-                (username,)).fetchone()[0]
+                (username,)).fetchone()
+        if not spassword: return
+        spassword = spassword[0]
         self.authenticated = True if spassword == digest(password) else False
         if self.authenticated:
             logger.info('Authenticated: %s' % username)

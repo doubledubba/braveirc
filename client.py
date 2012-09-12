@@ -14,9 +14,11 @@ import sys
 from functools import partial
 from pprint import pprint
 from multiprocessing import Process
+
+import easygui as eg
 from settings import *
 
-credentials = {'username': 'jnaranjo', 'password': 'test'}
+credentials = getCredentials()
 
 def die(msg=None, exit=0):
     s.close()
@@ -36,10 +38,12 @@ auth_token = query('auth', credentials)
 send(auth_token)
 auth = rdecode(get='auth')
 if not auth:
-    logger.warning('Failed to authenticate!')
+    err = 'Failed to authenticate!'
+    logger.warning(err)
+    eg.msgbox(err)
     die(exit=1)
 else:
-    print 'Login successful!'
+    eg.msgbox('Login successful!')
 
 ## get online users
 send(query('online users'))
