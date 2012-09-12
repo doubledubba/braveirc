@@ -15,8 +15,8 @@ from functools import partial
 from pprint import pprint
 from multiprocessing import Process
 
-import easygui as eg
 from settings import *
+from gui import getCredentials, msgbox
 
 credentials = getCredentials()
 
@@ -40,10 +40,10 @@ auth = rdecode(get='auth')
 if not auth:
     err = 'Failed to authenticate!'
     logger.warning(err)
-    eg.msgbox(err)
+    msgbox(err)
     die(exit=1)
 else:
-    eg.msgbox('Login successful!')
+    msgbox('Login successful!')
 
 ## get online users
 send(query('online users'))
