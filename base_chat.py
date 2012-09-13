@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'chat.ui'
 #
-# Created: Wed Sep 12 20:50:00 2012
+# Created: Wed Sep 12 20:57:57 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -66,6 +66,7 @@ class Ui_main(object):
 
         self.retranslateUi(main)
         QtCore.QObject.connect(self.lineEdit, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.pushButton.animateClick)
+        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), main.message)
         QtCore.QMetaObject.connectSlotsByName(main)
 
     def retranslateUi(self, main):

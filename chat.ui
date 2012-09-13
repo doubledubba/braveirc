@@ -123,8 +123,24 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>main</receiver>
+   <slot>message()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>706</x>
+     <y>526</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>739</x>
+     <y>32</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
-  <slot>crack()</slot>
+  <slot>message()</slot>
  </slots>
 </ui>
