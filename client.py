@@ -15,10 +15,8 @@ from functools import partial
 from pprint import pprint
 from multiprocessing import Process
 
-from settings import *
-from gui import getCredentials, msgbox
-
-credentials = getCredentials()
+from settings import * # be explicit
+import settings
 
 def die(msg=None, exit=0):
     s.close()
@@ -27,35 +25,35 @@ def die(msg=None, exit=0):
     sys.exit(exit)
 
 
-s.connect((HOST, PORT))
-send = partial(send, s)
-recv = partial(recv, s)
-rdecode = partial(rdecode, s)
-# Start connection
+def startChat(credentials):
+    s.connect((HOST, PORT))
+    send = partial(settings.send, s)
+    recv = partial(settings.recv, s)
+    rdecode = partial(settings.rdecode, s)
+    # Start connection
 
-## authenticate
-auth_token = query('auth', credentials)
-send(auth_token)
-auth = rdecode(get='auth')
-if not auth:
-    err = 'Failed to authenticate!'
-    logger.warning(err)
-    msgbox(err)
-    die(exit=1)
-else:
-    msgbox('Login successful!')
+    ## authenticate
+    auth_token = query('auth', credentials)
+    send(auth_token)
+    auth = rdecode(get='auth')
+    if not auth:
+        err = 'Failed to authenticate!'
+        logger.warning(err)
+        die(exit=1)
+    else:
+        logger.info('Login successful!')
 
-## get online users
-send(query('online users'))
-online = rdecode()
+    ## get online users
+    send(query('online users'))
+    online = rdecode()
 
-print 'Online users:'
-pprint(online.get('online'))
+    print 'Online users:'
+    pprint(online.get('online'))
 
 
-# get recent chat
+    # get recent chat
 
-# start chatter
+    # start chatter
 
-# End connection
-die()
+    # End connection
+    die()
