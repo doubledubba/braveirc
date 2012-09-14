@@ -11,26 +11,34 @@
 '''
 
 import sys
+import socket
 from functools import partial
 from pprint import pprint
 from multiprocessing import Process
 
-from settings import * # be explicit
 import settings
+from settings import HOST, PORT, logger
+from settings import query
 
-def die(msg=None, exit=0):
+
+def exit_(s, msg=None, exit=0):
     s.close()
     if msg:
         logger.info(msg)
     sys.exit(exit)
 
 
+
 def startChat(credentials):
-    s.connect((HOST, PORT))
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # Convenience functions
     send = partial(settings.send, s)
     recv = partial(settings.recv, s)
     rdecode = partial(settings.rdecode, s)
+    die = partial(exit_, s)
     # Start connection
+    s.connect((HOST, PORT))
 
     ## authenticate
     auth_token = query('auth', credentials)
@@ -57,3 +65,5 @@ def startChat(credentials):
 
     # End connection
     die()
+
+
