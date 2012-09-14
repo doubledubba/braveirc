@@ -12,6 +12,7 @@ class ChatWindow(QDialog, Ui_chat):
     def __init__(self):
         QDialog.__init__(self)
         self.setupUi(self)
+        self.setWindowTitle(QApplication.translate("chat", "Brave IRC Chat", None, QApplication.UnicodeUTF8))
 
     def message(self):
         text = self.lineEdit.text() # get user input
@@ -29,6 +30,7 @@ class LoginWindow(QDialog, Ui_login):
     def __init__(self):
         QDialog.__init__(self)
         self.setupUi(self)
+        self.setWindowTitle(QApplication.translate("login", "Brave IRC Chat", None, QApplication.UnicodeUTF8))
 
     def authenticate(self):
         get = lambda field: unicode(getattr(self, field).text())

@@ -106,11 +106,6 @@ def mainLoop():
         client.name = connection[1]
         clients.append(client)
 
-try:
-    mainLoop()
-except KeyboardInterrupt:
-    print 'Clients:', clients
-
 
 def addUser(username, password):
     password = digest(password)
@@ -122,5 +117,11 @@ def addUser(username, password):
 def showUsers():
     for row in cur.execute('select * from users'):
         print row
+
+if __name__ == '__main__':
+    try:
+        mainLoop()
+    except KeyboardInterrupt:
+        print 'Clients:', clients
 
 
