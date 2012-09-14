@@ -1,17 +1,16 @@
 import sys
-import Tkinter
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-from gui.chat import Ui_main
+from gui.chat import Ui_chat
 from gui.login import Ui_login
 from client import authentic
 
 
-class MainWindow(QMainWindow, Ui_main):
+class ChatWindow(QDialog, Ui_chat):
     def __init__(self):
-        QMainWindow.__init__(self)
+        QDialog.__init__(self)
         self.setupUi(self)
 
     def message(self):
@@ -31,6 +30,8 @@ class LoginWindow(QDialog, Ui_login):
         self.close()
         if authentic(credentials):
             print 'OPENING CHAT WINDOW'
+            main = ChatWindow()
+            main.exec_()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv, True)

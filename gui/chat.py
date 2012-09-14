@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/chat.ui'
 #
-# Created: Fri Sep 14 12:21:57 2012
+# Created: Fri Sep 14 13:09:53 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -14,15 +14,13 @@ try:
 except AttributeError:
     _fromUtf8 = lambda s: s
 
-class Ui_main(object):
-    def setupUi(self, main):
-        main.setObjectName(_fromUtf8("main"))
-        main.resize(472, 224)
-        self.centralwidget = QtGui.QWidget(main)
-        self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
-        self.horizontalLayout_2 = QtGui.QHBoxLayout(self.centralwidget)
+class Ui_chat(object):
+    def setupUi(self, chat):
+        chat.setObjectName(_fromUtf8("chat"))
+        chat.resize(583, 300)
+        self.horizontalLayout_2 = QtGui.QHBoxLayout(chat)
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        self.widget = QtGui.QWidget(self.centralwidget)
+        self.widget = QtGui.QWidget(chat)
         self.widget.setObjectName(_fromUtf8("widget"))
         self.verticalLayout = QtGui.QVBoxLayout(self.widget)
         self.verticalLayout.setMargin(0)
@@ -54,22 +52,17 @@ class Ui_main(object):
         self.horizontalLayout.addWidget(self.pushButton)
         self.verticalLayout.addWidget(self.frame)
         self.horizontalLayout_2.addWidget(self.widget)
-        self.verticalScrollBar = QtGui.QScrollBar(self.centralwidget)
+        self.verticalScrollBar = QtGui.QScrollBar(chat)
         self.verticalScrollBar.setOrientation(QtCore.Qt.Vertical)
         self.verticalScrollBar.setObjectName(_fromUtf8("verticalScrollBar"))
         self.horizontalLayout_2.addWidget(self.verticalScrollBar)
-        main.setCentralWidget(self.centralwidget)
-        self.menubar = QtGui.QMenuBar(main)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 472, 25))
-        self.menubar.setObjectName(_fromUtf8("menubar"))
-        main.setMenuBar(self.menubar)
 
-        self.retranslateUi(main)
+        self.retranslateUi(chat)
         QtCore.QObject.connect(self.lineEdit, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.pushButton.animateClick)
-        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), main.message)
-        QtCore.QMetaObject.connectSlotsByName(main)
+        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), chat.message)
+        QtCore.QMetaObject.connectSlotsByName(chat)
 
-    def retranslateUi(self, main):
-        main.setWindowTitle(QtGui.QApplication.translate("main", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButton.setText(QtGui.QApplication.translate("main", "Submit", None, QtGui.QApplication.UnicodeUTF8))
+    def retranslateUi(self, chat):
+        chat.setWindowTitle(QtGui.QApplication.translate("chat", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton.setText(QtGui.QApplication.translate("chat", "Submit", None, QtGui.QApplication.UnicodeUTF8))
 
