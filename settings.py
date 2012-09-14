@@ -3,8 +3,6 @@ import socket
 import json
 import logging
 
-import easygui as eg
-
 logging.basicConfig(format='[%(levelname)s] [%(asctime)s]: %(message)s',
         level=logging.DEBUG)
 
