@@ -24,7 +24,7 @@ cur.execute('create table if not exists users (username VARCHAR(255), password'
 conn.commit()
 
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-s.bind((HOST, PORT))
+s.bind(HOST)
 s.listen(1)
 
 
