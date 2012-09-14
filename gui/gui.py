@@ -6,6 +6,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from base_chat import Ui_main
+from base_login import Ui_login
 
 DEBUG = False
 msgbox = eg.msgbox
@@ -43,28 +44,31 @@ def getCredentials():
     return credentials
 
 
-
-
-
-
 class MainWindow(QMainWindow, Ui_main):
+    def __init__(self):
+        QMainWindow.__init__(self)
+        self.setupUi(self)
+
     def message(self):
         text = self.lineEdit.text() # get user input
         self.lineEdit.clear() # clear user input
         self.textEdit.append(text) # write user input to display
 
+
+class LoginWindow(QDialog, Ui_login):
     def __init__(self):
-        QMainWindow.__init__(self)
+        QDialog.__init__(self)
         self.setupUi(self)
 
+    def authenticate(self):
+        get = lambda field: unicode(getattr(self, field).text())
+        credentials = dict(username=get('username'), password=get('password'))
+        return credentials
 
-def runApp(MainWindow, argv=sys.argv):
-    app = QApplication(argv, True)
-    wnd = MainWindow()
-    wnd.show()
-    app.connect(app, SIGNAL("lastWindowClosed()"), app, SLOT("quit()"))
-    sys.exit(app.exec_())
- 
-if __name__ == "__main__":
-    print getCredentials()
-    runApp(MainWindow)
+if __name__ == '__main__':
+    app = QApplication(sys.argv, True)
+
+    window = LoginWindow()
+
+    window.show()
+    app.exec_()
