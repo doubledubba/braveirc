@@ -9,7 +9,8 @@ import sqlite3
 from functools import partial
 from settings import *
 
-DB = os.path.join(os.path.dirname(__file__), 'braveirc.db')
+DB = os.path.join(os.path.dirname(__file__), 'db')
+DB = os.path.join(DB, 'braveirc.db')
 DB = os.path.abspath(DB)
 if not os.path.isfile(DB):
     open(DB, 'a')
