@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'chat.ui'
 #
-# Created: Wed Sep 12 20:57:57 2012
+# Created: Fri Sep 14 10:35:17 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_main(object):
     def setupUi(self, main):
         main.setObjectName(_fromUtf8("main"))
-        main.resize(833, 567)
+        main.resize(472, 224)
         self.centralwidget = QtGui.QWidget(main)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.horizontalLayout_2 = QtGui.QHBoxLayout(self.centralwidget)
@@ -60,7 +60,7 @@ class Ui_main(object):
         self.horizontalLayout_2.addWidget(self.verticalScrollBar)
         main.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(main)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 833, 25))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 472, 25))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         main.setMenuBar(self.menubar)
 
