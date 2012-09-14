@@ -6,7 +6,7 @@ from PyQt4.QtGui import *
 
 from gui.chat import Ui_main
 from gui.login import Ui_login
-from client import startChat
+from client import authentic
 
 
 class MainWindow(QMainWindow, Ui_main):
@@ -29,7 +29,8 @@ class LoginWindow(QDialog, Ui_login):
         get = lambda field: unicode(getattr(self, field).text())
         credentials = dict(username=get('username'), password=get('password'))
         self.close()
-        startChat(credentials)
+        if authentic(credentials):
+            print 'OPENING CHAT WINDOW'
 
 if __name__ == '__main__':
     app = QApplication(sys.argv, True)

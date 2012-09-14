@@ -17,8 +17,11 @@ from pprint import pprint
 from multiprocessing import Process
 
 import settings
-from settings import HOST, PORT, logger
-from settings import query
+from settings import HOST, logger
+from settings import query, send, recv, rdecode
+
+
+makeSocket = lambda: socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 
 def exit_(s, msg=None, exit=0):
@@ -28,15 +31,42 @@ def exit_(s, msg=None, exit=0):
     sys.exit(exit)
 
 
+def authentic(credentials):
+    s = makeSocket()
+    s.connect(HOST)
+    
+    # Convenience functions
+    send = partial(settings.send, s) # send(string)
+    recv = partial(settings.recv, s) # recv() -> Encoded string
+    rdecode = partial(settings.rdecode, s) # recv() -> Decoded string
+    die = partial(exit_, s) # exit cleanly
 
-def startChat(credentials):
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    auth_token = query('auth', credentials)
+    send(auth_token)
+    auth = rdecode(get='auth')
+    if not auth:
+        err = 'Failed to authenticate!'
+        logger.warning(err)
+        die(exit=1)
+        authenticated = False
+    else:
+        logger.info('Login successful!')
+        authenticated = True
+
+    s.close()
+    return authenticated
+
+
+
+
+def startChat(credentials): # deprecated -> salvage and reconstruct
+    s = makeSocket()
 
     # Convenience functions
-    send = partial(settings.send, s)
-    recv = partial(settings.recv, s)
-    rdecode = partial(settings.rdecode, s)
-    die = partial(exit_, s)
+    send = partial(settings.send, s) # send(string)
+    recv = partial(settings.recv, s) # recv() -> Encoded string
+    rdecode = partial(settings.rdecode, s) # recv() -> Decoded string
+    die = partial(exit_, s) # exit cleanly
     # Start connection
     s.connect((HOST, PORT))
 
