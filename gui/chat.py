@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/chat.ui'
 #
-# Created: Fri Sep 14 11:38:02 2012
+# Created: Fri Sep 14 12:21:57 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
