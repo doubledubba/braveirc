@@ -25,9 +25,10 @@ class ChatWindow(QDialog, Ui_chat):
         print 'Cleared!'
         self.textEdit.clear()
 
-    def exit(self):
+    def shutdown(self):
         print 'Bye!'
         self.close()
+
 
 class LoginWindow(QDialog, Ui_login):
     def __init__(self):
@@ -41,7 +42,6 @@ class LoginWindow(QDialog, Ui_login):
         if authentic(credentials) or DEBUG:
             main = ChatWindow()
             main.exec_()
-            print 1
 
 if __name__ == '__main__':
     app = QApplication(sys.argv, True)

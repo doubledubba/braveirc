@@ -21,7 +21,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="buttonBar">
      <item>
       <widget class="QCommandLinkButton" name="clear_button">
        <property name="text">
@@ -39,7 +39,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <layout class="QHBoxLayout" name="chatBar">
      <item>
       <widget class="QWidget" name="widget" native="true">
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -92,7 +92,7 @@
             </spacer>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="submitButton">
              <property name="maximumSize">
               <size>
                <width>100</width>
@@ -111,7 +111,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QScrollBar" name="verticalScrollBar">
+      <widget class="QScrollBar" name="scrollBar">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -123,7 +123,7 @@
  </widget>
  <tabstops>
   <tabstop>lineEdit</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>submitButton</tabstop>
   <tabstop>clear_button</tabstop>
   <tabstop>quit_button</tabstop>
   <tabstop>textEdit</tabstop>
@@ -131,18 +131,18 @@
  <resources/>
  <connections>
   <connection>
-   <sender>clear_button</sender>
+   <sender>submitButton</sender>
    <signal>clicked()</signal>
    <receiver>chat</receiver>
-   <slot>clear()</slot>
+   <slot>message()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>254</x>
-     <y>27</y>
+     <x>477</x>
+     <y>295</y>
     </hint>
     <hint type="destinationlabel">
-     <x>477</x>
-     <y>-5</y>
+     <x>554</x>
+     <y>290</y>
     </hint>
    </hints>
   </connection>
@@ -150,54 +150,38 @@
    <sender>quit_button</sender>
    <signal>clicked()</signal>
    <receiver>chat</receiver>
-   <slot>exit()</slot>
+   <slot>shutdown()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>420</x>
+     <x>387</x>
      <y>29</y>
     </hint>
     <hint type="destinationlabel">
-     <x>556</x>
-     <y>24</y>
+     <x>555</x>
+     <y>31</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>lineEdit</sender>
-   <signal>returnPressed()</signal>
-   <receiver>pushButton</receiver>
-   <slot>animateClick()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>299</x>
-     <y>293</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>450</x>
-     <y>284</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton</sender>
+   <sender>clear_button</sender>
    <signal>clicked()</signal>
    <receiver>chat</receiver>
-   <slot>message()</slot>
+   <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>467</x>
-     <y>282</y>
+     <x>196</x>
+     <y>30</y>
     </hint>
     <hint type="destinationlabel">
      <x>556</x>
-     <y>241</y>
+     <y>76</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
-  <slot>clear()</slot>
-  <slot>exit()</slot>
   <slot>message()</slot>
+  <slot>shutdown()</slot>
+  <slot>clear()</slot>
  </slots>
 </ui>
