@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/chat.ui'
 #
-# Created: Fri Sep 14 13:09:53 2012
+# Created: Fri Sep 14 13:54:09 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,9 +17,21 @@ except AttributeError:
 class Ui_chat(object):
     def setupUi(self, chat):
         chat.setObjectName(_fromUtf8("chat"))
-        chat.resize(583, 300)
-        self.horizontalLayout_2 = QtGui.QHBoxLayout(chat)
+        chat.resize(560, 330)
+        chat.setMinimumSize(QtCore.QSize(560, 330))
+        self.verticalLayout_2 = QtGui.QVBoxLayout(chat)
+        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
+        self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+        self.clear_button = QtGui.QCommandLinkButton(chat)
+        self.clear_button.setObjectName(_fromUtf8("clear_button"))
+        self.horizontalLayout_2.addWidget(self.clear_button)
+        self.quit_button = QtGui.QCommandLinkButton(chat)
+        self.quit_button.setObjectName(_fromUtf8("quit_button"))
+        self.horizontalLayout_2.addWidget(self.quit_button)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
+        self.horizontalLayout_3 = QtGui.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
         self.widget = QtGui.QWidget(chat)
         self.widget.setObjectName(_fromUtf8("widget"))
         self.verticalLayout = QtGui.QVBoxLayout(self.widget)
@@ -51,18 +63,27 @@ class Ui_chat(object):
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.horizontalLayout.addWidget(self.pushButton)
         self.verticalLayout.addWidget(self.frame)
-        self.horizontalLayout_2.addWidget(self.widget)
+        self.horizontalLayout_3.addWidget(self.widget)
         self.verticalScrollBar = QtGui.QScrollBar(chat)
         self.verticalScrollBar.setOrientation(QtCore.Qt.Vertical)
         self.verticalScrollBar.setObjectName(_fromUtf8("verticalScrollBar"))
-        self.horizontalLayout_2.addWidget(self.verticalScrollBar)
+        self.horizontalLayout_3.addWidget(self.verticalScrollBar)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_3)
 
         self.retranslateUi(chat)
+        QtCore.QObject.connect(self.clear_button, QtCore.SIGNAL(_fromUtf8("clicked()")), chat.clear)
+        QtCore.QObject.connect(self.quit_button, QtCore.SIGNAL(_fromUtf8("clicked()")), chat.exit)
         QtCore.QObject.connect(self.lineEdit, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.pushButton.animateClick)
         QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), chat.message)
         QtCore.QMetaObject.connectSlotsByName(chat)
+        chat.setTabOrder(self.lineEdit, self.pushButton)
+        chat.setTabOrder(self.pushButton, self.clear_button)
+        chat.setTabOrder(self.clear_button, self.quit_button)
+        chat.setTabOrder(self.quit_button, self.textEdit)
 
     def retranslateUi(self, chat):
         chat.setWindowTitle(QtGui.QApplication.translate("chat", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
+        self.clear_button.setText(QtGui.QApplication.translate("chat", "Clear", None, QtGui.QApplication.UnicodeUTF8))
+        self.quit_button.setText(QtGui.QApplication.translate("chat", "Quit", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton.setText(QtGui.QApplication.translate("chat", "Submit", None, QtGui.QApplication.UnicodeUTF8))
 
