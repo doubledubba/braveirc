@@ -181,6 +181,16 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>user</tabstop>
+  <tabstop>secret</tabstop>
+  <tabstop>addUserButton</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>userBox</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>users</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
@@ -228,6 +238,38 @@
     <hint type="destinationlabel">
      <x>614</x>
      <y>91</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>secret</sender>
+   <signal>returnPressed()</signal>
+   <receiver>addUserButton</receiver>
+   <slot>animateClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>173</x>
+     <y>303</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>266</x>
+     <y>399</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>user</sender>
+   <signal>returnPressed()</signal>
+   <receiver>addUserButton</receiver>
+   <slot>animateClick()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>378</x>
+     <y>139</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>398</y>
     </hint>
    </hints>
   </connection>
