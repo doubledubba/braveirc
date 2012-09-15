@@ -20,7 +20,7 @@ class ChatWindow(QMainWindow, Ui_chat):
     def addMsg(self):
         text = self.lineEdit.text() # get user input
         self.lineEdit.clear() # clear user input
-        self.textEdit.append(text) # write user input to display
+        self.textEdit.appendPlainText(text) # write user input to display
 
     def clear(self):
         self.textEdit.clear()

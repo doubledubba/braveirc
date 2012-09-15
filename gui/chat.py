@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/chat.ui'
 #
-# Created: Fri Sep 14 20:58:30 2012
+# Created: Fri Sep 14 21:59:46 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -44,10 +44,10 @@ class Ui_chat(object):
         self.verticalLayout = QtGui.QVBoxLayout(self.widget_3)
         self.verticalLayout.setMargin(0)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.plainTextEdit = QtGui.QPlainTextEdit(self.widget_3)
-        self.plainTextEdit.setEnabled(False)
-        self.plainTextEdit.setObjectName(_fromUtf8("plainTextEdit"))
-        self.verticalLayout.addWidget(self.plainTextEdit)
+        self.textEdit = QtGui.QPlainTextEdit(self.widget_3)
+        self.textEdit.setEnabled(False)
+        self.textEdit.setObjectName(_fromUtf8("textEdit"))
+        self.verticalLayout.addWidget(self.textEdit)
         self.frame = QtGui.QFrame(self.widget_3)
         self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtGui.QFrame.Raised)
@@ -90,10 +90,9 @@ class Ui_chat(object):
 
         self.retranslateUi(chat)
         QtCore.QObject.connect(self.commandLinkButton_3, QtCore.SIGNAL(_fromUtf8("clicked()")), chat.close)
-        QtCore.QObject.connect(self.commandLinkButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.plainTextEdit.clear)
+        QtCore.QObject.connect(self.commandLinkButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.textEdit.clear)
         QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), chat.addMsg)
         QtCore.QObject.connect(self.lineEdit, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.pushButton.animateClick)
-        QtCore.QObject.connect(self.actionSettings, QtCore.SIGNAL(_fromUtf8("activated()")), chat.menu_settings)
         QtCore.QMetaObject.connectSlotsByName(chat)
 
     def retranslateUi(self, chat):

@@ -42,7 +42,7 @@
         <widget class="QWidget" name="widget_3" native="true">
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QPlainTextEdit" name="plainTextEdit">
+           <widget class="QPlainTextEdit" name="textEdit">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -152,7 +152,7 @@
   <connection>
    <sender>commandLinkButton</sender>
    <signal>clicked()</signal>
-   <receiver>plainTextEdit</receiver>
+   <receiver>textEdit</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -194,22 +194,6 @@
     <hint type="destinationlabel">
      <x>544</x>
      <y>389</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionSettings</sender>
-   <signal>activated()</signal>
-   <receiver>chat</receiver>
-   <slot>menu_settings()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>333</x>
-     <y>230</y>
     </hint>
    </hints>
   </connection>
