@@ -10,6 +10,8 @@ from ui.add import Ui_add
 from ui.delete import Ui_deleter
 from ui.view import Ui_viewer
 
+from ui.composite import Ui_composite
+
 conn = sqlite3.connect('braveirc.db')
 cur = conn.cursor()
 
@@ -82,11 +84,19 @@ class MainWindow(QMainWindow, Ui_main):
             self.close()
         view.exec_()
 
+class CompositeWindow(QMainWindow, Ui_composite):
+    def __init__(self):
+        QMainWindow.__init__(self)
+        self.setupUi(self)
+        self.show()
+
+    def deleteUser(self):
+        print 'Deleted a user! Not really!'
 
 if __name__ == '__main__':
     app = QApplication(sys.argv, True)
 
-    window = MainWindow()
+    window = CompositeWindow()
 
     app.exec_()
 

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>363</width>
+    <width>376</width>
     <height>99</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
     <widget class="QComboBox" name="comboBox"/>
    </item>
    <item>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="pushButton_2">
      <property name="text">
       <string>Delete</string>
      </property>
@@ -27,24 +27,7 @@
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>pushButton</sender>
-   <signal>clicked()</signal>
-   <receiver>deleter</receiver>
-   <slot>selectUser()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>238</x>
-     <y>48</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>255</x>
-     <y>19</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>selectUser()</slot>
  </slots>

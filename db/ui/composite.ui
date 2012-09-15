@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>composite</class>
+ <widget class="QMainWindow" name="composite">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -15,6 +15,16 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
+     <widget class="QDialogButtonBox" name="buttonBox">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
@@ -25,6 +35,24 @@
         <string>Add User</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Password</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="password_box_2">
+            <property name="echoMode">
+             <enum>QLineEdit::Password</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
@@ -39,34 +67,6 @@
           </item>
          </layout>
         </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Password</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="password_box">
-            <property name="echoMode">
-             <enum>QLineEdit::Password</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QDialogButtonBox" name="buttonBox">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="standardButtons">
-           <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="deleteUser">
@@ -75,14 +75,14 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
-         <widget class="QComboBox" name="comboBox"/>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="pushButton_2">
           <property name="text">
            <string>Delete</string>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBox"/>
         </item>
        </layout>
       </widget>
@@ -92,9 +92,9 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
           <item>
-           <spacer name="horizontalSpacer">
+           <spacer name="horizontalSpacer_3">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -107,7 +107,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="label_6">
             <property name="enabled">
              <bool>true</bool>
             </property>
@@ -117,7 +117,7 @@
            </widget>
           </item>
           <item>
-           <spacer name="horizontalSpacer_2">
+           <spacer name="horizontalSpacer_4">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -158,4 +158,7 @@
  </widget>
  <resources/>
  <connections/>
+ <slots>
+  <slot>deleteUser()</slot>
+ </slots>
 </ui>
