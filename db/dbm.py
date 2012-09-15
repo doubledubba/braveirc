@@ -1,5 +1,6 @@
 import sys
 import sqlite3
+import hashlib
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -7,9 +8,12 @@ from PyQt4.QtGui import *
 from ui.main import Ui_main
 from ui.add import Ui_add
 from ui.delete import Ui_deleter
+from ui.view import Ui_viewer
 
 conn = sqlite3.connect('braveirc.db')
 cur = conn.cursor()
+
+digest = lambda password: hashlib.md5(password).hexdigest()
 
 class AddWindow(QDialog, Ui_add):
     def __init__(self):
@@ -19,6 +23,7 @@ class AddWindow(QDialog, Ui_add):
     def accept(self):
         username = unicode(self.username_box.text())
         password = unicode(self.password_box.text())
+        password = digest(password)
         cur.execute('INSERT INTO users (username, password) values (?, ?)',
                 (username, password))
         conn.commit()
@@ -41,8 +46,19 @@ class DeleteWindow(QDialog, Ui_deleter):
         conn.commit()
 
 
-class MainWindow(QMainWindow, Ui_main):
+class ViewWindow(QDialog, Ui_viewer):
     def __init__(self):
+        QDialog.__init__(self)
+        self.setupUi(self)
+        user_list = list(cur.execute('SELECT username FROM users'))
+        users = ''
+        for index, user in enumerate(user_list):
+            users += '%d: %s' % (index, user[0])
+        self.users.setPlainText(users)
+
+class MainWindow(QMainWindow, Ui_main):
+    def __init__(self, close_main=False):
+        self.close_main = close_main
         QMainWindow.__init__(self)
         self.setupUi(self)
         self.setWindowTitle(QApplication.translate("main", "Brave IRC DBM", None, QApplication.UnicodeUTF8))
@@ -50,16 +66,21 @@ class MainWindow(QMainWindow, Ui_main):
 
     def addUser(self):
         add = AddWindow()
-        self.close()
+        if self.close_main:
+            self.close()
         add.exec_()
 
     def deleteUser(self):
         delete = DeleteWindow()
-        self.close()
+        if self.close_main:
+            self.close()
         delete.exec_()
 
     def viewUsers(self):
-        print 'Here are all of the users!'
+        view = ViewWindow()
+        if self.close_main:
+            self.close()
+        view.exec_()
 
 
 if __name__ == '__main__':

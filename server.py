@@ -19,8 +19,8 @@ digest = lambda password: hashlib.md5(password).hexdigest()
 
 conn = sqlite3.connect(DB, check_same_thread=False)
 cur = conn.cursor()
-cur.execute('create table if not exists users (username VARCHAR(255), password'
-        ' VARCHAR(255))')
+cur.execute('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, '
+        'username VARCHAR(255), password VARCHAR(255))')
 
 conn.commit()
 
@@ -52,6 +52,7 @@ class Client(threading.Thread):
                 (username,)).fetchone()
         if not spassword: return
         spassword = spassword[0]
+
         self.authenticated = True if spassword == digest(password) else False
         if self.authenticated:
             logger.info('Authenticated: %s' % username)
