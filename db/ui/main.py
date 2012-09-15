@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/main.ui'
 #
-# Created: Fri Sep 14 17:22:48 2012
+# Created: Fri Sep 14 17:39:08 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -24,15 +24,18 @@ class Ui_main(object):
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.verticalLayout = QtGui.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.pushButton = QtGui.QPushButton(self.centralwidget)
-        self.pushButton.setObjectName(_fromUtf8("pushButton"))
-        self.verticalLayout.addWidget(self.pushButton)
-        self.pushButton_2 = QtGui.QPushButton(self.centralwidget)
-        self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
-        self.verticalLayout.addWidget(self.pushButton_2)
-        self.pushButton_3 = QtGui.QPushButton(self.centralwidget)
-        self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
-        self.verticalLayout.addWidget(self.pushButton_3)
+        self.addButton = QtGui.QPushButton(self.centralwidget)
+        self.addButton.setObjectName(_fromUtf8("addButton"))
+        self.verticalLayout.addWidget(self.addButton)
+        self.deleteButton = QtGui.QPushButton(self.centralwidget)
+        self.deleteButton.setObjectName(_fromUtf8("deleteButton"))
+        self.verticalLayout.addWidget(self.deleteButton)
+        self.viewButton = QtGui.QPushButton(self.centralwidget)
+        self.viewButton.setObjectName(_fromUtf8("viewButton"))
+        self.verticalLayout.addWidget(self.viewButton)
+        self.exitButton = QtGui.QPushButton(self.centralwidget)
+        self.exitButton.setObjectName(_fromUtf8("exitButton"))
+        self.verticalLayout.addWidget(self.exitButton)
         main.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(main)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 189, 25))
@@ -49,16 +52,18 @@ class Ui_main(object):
         self.menubar.addAction(self.menuBrave_IRC_DBM.menuAction())
 
         self.retranslateUi(main)
-        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), main.addUser)
-        QtCore.QObject.connect(self.pushButton_2, QtCore.SIGNAL(_fromUtf8("clicked()")), main.deleteUser)
-        QtCore.QObject.connect(self.pushButton_3, QtCore.SIGNAL(_fromUtf8("clicked()")), main.viewUsers)
+        QtCore.QObject.connect(self.addButton, QtCore.SIGNAL(_fromUtf8("clicked()")), main.addUser)
+        QtCore.QObject.connect(self.deleteButton, QtCore.SIGNAL(_fromUtf8("clicked()")), main.deleteUser)
+        QtCore.QObject.connect(self.viewButton, QtCore.SIGNAL(_fromUtf8("clicked()")), main.viewUsers)
+        QtCore.QObject.connect(self.exitButton, QtCore.SIGNAL(_fromUtf8("clicked()")), main.close)
         QtCore.QMetaObject.connectSlotsByName(main)
 
     def retranslateUi(self, main):
         main.setWindowTitle(QtGui.QApplication.translate("main", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButton.setText(QtGui.QApplication.translate("main", "Add User", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButton_2.setText(QtGui.QApplication.translate("main", "Delete User", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButton_3.setText(QtGui.QApplication.translate("main", "View Users", None, QtGui.QApplication.UnicodeUTF8))
+        self.addButton.setText(QtGui.QApplication.translate("main", "Add User", None, QtGui.QApplication.UnicodeUTF8))
+        self.deleteButton.setText(QtGui.QApplication.translate("main", "Delete User", None, QtGui.QApplication.UnicodeUTF8))
+        self.viewButton.setText(QtGui.QApplication.translate("main", "View Users", None, QtGui.QApplication.UnicodeUTF8))
+        self.exitButton.setText(QtGui.QApplication.translate("main", "Exit", None, QtGui.QApplication.UnicodeUTF8))
         self.menuBrave_IRC_DBM.setTitle(QtGui.QApplication.translate("main", "Brave IRC DBM", None, QtGui.QApplication.UnicodeUTF8))
         self.actionQuit.setText(QtGui.QApplication.translate("main", "Quit", None, QtGui.QApplication.UnicodeUTF8))
 

@@ -28,23 +28,30 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="addButton">
       <property name="text">
        <string>Add User</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="deleteButton">
       <property name="text">
        <string>Delete User</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="viewButton">
       <property name="text">
        <string>View Users</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="exitButton">
+      <property name="text">
+       <string>Exit</string>
       </property>
      </widget>
     </item>
@@ -77,7 +84,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton</sender>
+   <sender>addButton</sender>
    <signal>clicked()</signal>
    <receiver>main</receiver>
    <slot>addUser()</slot>
@@ -93,14 +100,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_2</sender>
+   <sender>deleteButton</sender>
    <signal>clicked()</signal>
    <receiver>main</receiver>
    <slot>deleteUser()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>139</x>
-     <y>94</y>
+     <y>79</y>
     </hint>
     <hint type="destinationlabel">
      <x>186</x>
@@ -109,18 +116,34 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_3</sender>
+   <sender>viewButton</sender>
    <signal>clicked()</signal>
    <receiver>main</receiver>
    <slot>viewUsers()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>79</x>
-     <y>137</y>
+     <y>114</y>
     </hint>
     <hint type="destinationlabel">
      <x>89</x>
      <y>157</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>exitButton</sender>
+   <signal>clicked()</signal>
+   <receiver>main</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>145</x>
+     <y>139</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>191</x>
+     <y>124</y>
     </hint>
    </hints>
   </connection>
