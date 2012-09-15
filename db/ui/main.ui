@@ -75,5 +75,59 @@
   </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>main</receiver>
+   <slot>addUser()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>107</x>
+     <y>47</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>163</x>
+     <y>27</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>main</receiver>
+   <slot>deleteUser()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>139</x>
+     <y>94</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>186</x>
+     <y>75</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>main</receiver>
+   <slot>viewUsers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>79</x>
+     <y>137</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>89</x>
+     <y>157</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>addUser()</slot>
+  <slot>deleteUser()</slot>
+  <slot>viewUsers()</slot>
+ </slots>
 </ui>

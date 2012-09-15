@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/main.ui'
 #
-# Created: Fri Sep 14 15:36:09 2012
+# Created: Fri Sep 14 17:14:37 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -49,6 +49,9 @@ class Ui_main(object):
         self.menubar.addAction(self.menuBrave_IRC_DBM.menuAction())
 
         self.retranslateUi(main)
+        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), main.addUser)
+        QtCore.QObject.connect(self.pushButton_2, QtCore.SIGNAL(_fromUtf8("clicked()")), main.deleteUser)
+        QtCore.QObject.connect(self.pushButton_3, QtCore.SIGNAL(_fromUtf8("clicked()")), main.viewUsers)
         QtCore.QMetaObject.connectSlotsByName(main)
 
     def retranslateUi(self, main):

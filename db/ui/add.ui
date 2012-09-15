@@ -30,7 +30,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="username_box"/>
      </item>
     </layout>
    </item>
@@ -44,7 +44,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="password_box">
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
        </property>
@@ -73,8 +73,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>211</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -89,8 +89,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>211</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>

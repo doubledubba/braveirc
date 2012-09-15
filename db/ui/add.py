@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/add.ui'
 #
-# Created: Fri Sep 14 15:36:09 2012
+# Created: Fri Sep 14 17:14:37 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,19 +26,19 @@ class Ui_add(object):
         self.label = QtGui.QLabel(add)
         self.label.setObjectName(_fromUtf8("label"))
         self.horizontalLayout.addWidget(self.label)
-        self.lineEdit = QtGui.QLineEdit(add)
-        self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
-        self.horizontalLayout.addWidget(self.lineEdit)
+        self.username_box = QtGui.QLineEdit(add)
+        self.username_box.setObjectName(_fromUtf8("username_box"))
+        self.horizontalLayout.addWidget(self.username_box)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
         self.label_2 = QtGui.QLabel(add)
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.horizontalLayout_2.addWidget(self.label_2)
-        self.lineEdit_2 = QtGui.QLineEdit(add)
-        self.lineEdit_2.setEchoMode(QtGui.QLineEdit.Password)
-        self.lineEdit_2.setObjectName(_fromUtf8("lineEdit_2"))
-        self.horizontalLayout_2.addWidget(self.lineEdit_2)
+        self.password_box = QtGui.QLineEdit(add)
+        self.password_box.setEchoMode(QtGui.QLineEdit.Password)
+        self.password_box.setObjectName(_fromUtf8("password_box"))
+        self.horizontalLayout_2.addWidget(self.password_box)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.buttonBox = QtGui.QDialogButtonBox(add)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
