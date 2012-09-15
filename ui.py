@@ -8,13 +8,16 @@ from gui.login import Ui_login
 from client import authentic
 
 
-class ChatWindow(QDialog, Ui_chat):
+class ChatWindow(QMainWindow, Ui_chat):
+
+    closed = pyqtSignal()
+
     def __init__(self):
-        QDialog.__init__(self)
+        QMainWindow.__init__(self)
         self.setupUi(self)
         self.setWindowTitle(QApplication.translate("chat", "Brave IRC Chat", None, QApplication.UnicodeUTF8))
 
-    def message(self):
+    def addMsg(self):
         text = self.lineEdit.text() # get user input
         self.lineEdit.clear() # clear user input
         self.textEdit.append(text) # write user input to display
@@ -24,6 +27,9 @@ class ChatWindow(QDialog, Ui_chat):
 
     def shutdown(self):
         self.close()
+
+    def menu_settings(self):
+        print 'Yay menu settings!'
 
 
 class LoginWindow(QDialog, Ui_login):
@@ -35,10 +41,14 @@ class LoginWindow(QDialog, Ui_login):
     def authenticate(self):
         get = lambda field: unicode(getattr(self, field).text())
         credentials = dict(username=get('username'), password=get('password'))
-        self.close()
+        print credentials
         if authentic(credentials):
-            main = ChatWindow()
-            main.exec_()
+            self.mainChat = ChatWindow()
+            self.mainChat.closed.connect(self.show)
+            self.mainChat.show()
+            self.hide()
+        else:
+            notify('Authenticated failed!', 'Hmmmm...')
 
 if __name__ == '__main__':
     app = QApplication(sys.argv, True)

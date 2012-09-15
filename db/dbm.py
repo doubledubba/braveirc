@@ -84,12 +84,13 @@ class CompositeWindow(QMainWindow, Ui_composite):
         self.update_info()
 
 
-if __name__ == '__main__':
+def run():
     app = QApplication(sys.argv, True)
-
     window = CompositeWindow()
-
     app.exec_()
+
+if __name__ == '__main__':
+    run()
 
 conn.close()
 
