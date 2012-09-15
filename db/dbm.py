@@ -90,12 +90,14 @@ class CompositeWindow(QMainWindow, Ui_composite):
         self.setupUi(self)
         self.setWindowTitle(QApplication.translate("main", "Brave IRC DBM", None, QApplication.UnicodeUTF8))
         self.show()
+        self.update_info()
 
-        user_list = list(cur.execute('SELECT username FROM users'))
+    def update_info(self):
+        user_list = list(cur.execute('SELECT id, username FROM users'))
         users = ''
-        for index, user in enumerate(user_list):
-            users += '%d: %s' % (index, user[0])
-            self.userBox.insertItem(index, user[0])
+        for index, user in user_list:
+            users += '%d: %s\n' % (index, user)
+            self.userBox.insertItem(index, user)
         self.users.setPlainText(users)
 
 
@@ -105,6 +107,8 @@ class CompositeWindow(QMainWindow, Ui_composite):
         print 'Deleted:', username # Update comboBox and/or success dialog
         cur.execute("DELETE FROM users WHERE username='%s'" %  username)
         conn.commit()
+        self.userBox.clear()
+        self.update_info()
 
 
 if __name__ == '__main__':
