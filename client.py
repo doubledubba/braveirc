@@ -20,6 +20,8 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect(HOST)
 client = Communication(sock)
 # Start regular communication
+username = raw_input('> ')
 
-username = 'jnaranjo'
 client.send({'username': username})
+ok = client.recv()
+print ok

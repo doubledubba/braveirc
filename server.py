@@ -22,15 +22,19 @@ class Client(Thread, Communication):
 
     def run(self):
         logger.debug('Started connection from: %s' % self.name)
+        self.login()
 
-        credentials = self.recv()
-        self.username = credentials.get('username')
+    def login(self):
+        self.username = self.get('username')
         if not self.username:
             self.shutdown()
             return
 
-        print self.username, 'logged in'
-
+        self.authenticated = True
+        if self.authenticated:
+            self.send('%s is authenticated' % self.username)
+        else:
+            self.send('%s is not authenticated' % self.username)
 
     def shutdown(self):
         logger.debug('Shutting down socket')

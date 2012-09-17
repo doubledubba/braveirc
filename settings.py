@@ -48,11 +48,18 @@ class Communication(object):
         return self.recvall(msg_length)
 
     def send(self, obj): # Encode object in JSON then send it
-        obj = json.dumps(obj)
-        self.send_raw(obj)
+        if obj:
+            obj = json.dumps(obj)
+            self.send_raw(obj)
+        else:
+            print 'send method did not get an object to send!'
 
     def recv(self): # Receive JSON message and decode it
         response = self.recv_raw()
         return json.loads(response)
+
+    def get(self, key):
+        response = self.recv()
+        return response.get(key)
 
 
