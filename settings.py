@@ -5,20 +5,16 @@ import logging
 
 logging.basicConfig(format='[%(levelname)s] [%(asctime)s]: %(message)s',
         level=logging.DEBUG)
+logger = logging.getLogger()
+
+arg = lambda i, default: sys.argv[i] if len(sys.argv) > i else default
+HOSTNAME = arg(1, '127.0.0.1')
+PORT = arg(2, 1060)
+HOST = (HOSTNAME, PORT)
+logger.debug('Server hostname: %s:%s' % (HOSTNAME, PORT))
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-arg = lambda i, default: sys.argv[i] if len(sys.argv) > i else default
-
-HOSTNAME = arg(1, '127.0.0.1')
-PORT = arg(2, 1060)
-
-HOST = (HOSTNAME, PORT)
-
-DEBUG = True
-DEBUG = False
-
-logger = logging.getLogger()
 
 def recvall(sock, length):
     data = ''
@@ -42,54 +38,12 @@ def send(sc, msg):
 
 
 def recv(sc):
+    '''Receives a message of arbitrary length.'''
     msg_length = recvall(sc, 4)
-    if not msg_length.isalnum():
-        print msg_length
-        raise ValueError('Invalid message length header!')
+    if not msg_length.isnum():
+        raise ValueError('Invalid message length header (%r)!' % msg_length)
     msg_length = int(msg_length)
 
     return recvall(sc, msg_length)
 
 
-def query(method, *dicts):
-    request = {method if dicts else 'command': {} if dicts else method}
-    for dictionary in dicts:
-        for key in dictionary:
-            request[method][key] = dictionary[key]
-
-    return encode(request)
-
-
-def decode(string):
-    '''Parses a JSON string into a python object.'''
-
-    try:
-        return json.loads(string)
-    except:
-        logger.warning('Error occurred while trying to decode: %s' % string)
-
-
-def encode(object):
-    '''Encodes a python object into a JSON string.'''
-    try:
-        return json.dumps(object)
-    except ValueError, tb:
-        logger.critical(str(tb))
-
-
-def rdecode(sc, get=None):
-    response = recv(sc)
-    response = decode(response)
-    if get:
-        response = response.get(get)
-    return response
-
-
-def dictencode(**kwargs):
-    raw = dict(**kwargs)
-    return encode(raw)
-
-
-if __name__ == '__main__':
-    print 'Host:', HOST
-    print 'Port:', PORT
