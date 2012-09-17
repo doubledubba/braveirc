@@ -48,7 +48,7 @@ class Communication(object):
         return self.recvall(msg_length)
 
     def send(self, obj): # Encode object in JSON then send it
-        if obj:
+        if obj is not None:
             obj = json.dumps(obj)
             self.send_raw(obj)
         else:

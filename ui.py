@@ -21,6 +21,9 @@ class MsgWindow(QDialog, Ui_msg): # I may just not use this.
         self.setWindowTitle(QApplication.translate("msg", title, None, QApplication.UnicodeUTF8))
         self.exec_()
 
+def notify(*args, **kwargs):
+    print args
+    print kwargs
 
 class ChatWindow(QMainWindow, Ui_chat):
 
@@ -56,15 +59,15 @@ class LoginWindow(QDialog, Ui_login):
 
     def authenticate(self):
         get = lambda field: unicode(getattr(self, field).text())
-        credentials = dict(username=get('username'), password=get('password'))
-        print credentials
-        if authentic(credentials):
+        credentials = get('username'), get('password')
+        if authentic(*credentials):
             self.mainChat = ChatWindow()
             self.mainChat.closed.connect(self.show)
             self.mainChat.show()
             self.hide()
         else:
             notify('Authenticated failed!', 'Hmmmm...')
+            self.close()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv, True)

@@ -20,8 +20,10 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect(HOST)
 client = Communication(sock)
 # Start regular communication
-username = raw_input('> ')
 
-client.send({'username': username})
-ok = client.recv()
-print ok
+## Login
+def authentic(username, password):
+    credentials = {'credentials': (username, password)}
+    client.send(credentials)
+    ok = client.recv()
+    return ok

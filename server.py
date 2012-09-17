@@ -5,6 +5,7 @@ from threading import Thread
 from functools import partial
 
 from settings import HOST, logger, Communication
+from db import verifyUser
 
 SOCKET = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 SOCKET.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -22,22 +23,26 @@ class Client(Thread, Communication):
 
     def run(self):
         logger.debug('Started connection from: %s' % self.name)
-        self.login()
+        if not self.login():
+            self.shutdown()
+            return
+        print 'Yay cool stuff'
 
     def login(self):
-        self.username = self.get('username')
-        if not self.username:
+        self.username, password = self.get('credentials')
+        if not self.username or not password:
             self.shutdown()
             return
 
-        self.authenticated = True
+        self.authenticated = verifyUser(self.username, password) # Bool
         if self.authenticated:
-            self.send('%s is authenticated' % self.username)
+            self.send(True)
+            return True
         else:
-            self.send('%s is not authenticated' % self.username)
+            self.send(False)
 
     def shutdown(self):
-        logger.debug('Shutting down socket')
+        logger.debug('Manually shutting down socket')
         self.socket.close()
 
 try:
