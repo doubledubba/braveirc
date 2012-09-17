@@ -18,7 +18,10 @@ from settings import HOST, logger
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-send = partial(settings.send, sock)
-recv = partial(settings.recv, sock)
-
 sock.connect(HOST)
+client = settings.Communication(sock)
+# Start regular communication
+
+username = 'jnaranjo'
+password = 'test'
+client.send('hai')
