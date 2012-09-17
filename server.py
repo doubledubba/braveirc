@@ -17,11 +17,24 @@ class Client(Thread, Communication):
     def __init__(self, sock, sockname):
         Thread.__init__(self)
         Communication.__init__(self, sock)
+        self.name = sockname
         clients.append(self)
 
     def run(self):
         logger.debug('Started connection from: %s' % self.name)
 
+        credentials = self.recv()
+        self.username = credentials.get('username')
+        if not self.username:
+            self.shutdown()
+            return
+
+        print self.username, 'logged in'
+
+
+    def shutdown(self):
+        logger.debug('Shutting down socket')
+        self.socket.close()
 
 try:
     while True:

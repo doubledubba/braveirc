@@ -22,5 +22,4 @@ client = Communication(sock)
 # Start regular communication
 
 username = 'jnaranjo'
-password = 'test'
-client.send(dict(ass=True))
+client.send({'username': username})
