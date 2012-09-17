@@ -4,7 +4,7 @@ import socket
 from threading import Thread
 from functools import partial
 
-from settings import HOST, logger, Communicate
+from settings import HOST, logger, Communication
 
 SOCKET = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 SOCKET.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -13,10 +13,10 @@ SOCKET.listen(1)
 
 clients = []
 
-class Client(Thread, Communicate):
+class Client(Thread, Communication):
     def __init__(self, sock, sockname):
         Thread.__init__(self)
-        Communicate.__init__(self, sock)
+        Communication.__init__(self, sock)
         clients.append(self)
 
     def run(self):

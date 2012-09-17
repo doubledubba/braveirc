@@ -13,15 +13,14 @@
 import socket
 from functools import partial
 
-import settings
-from settings import HOST, logger
+from settings import HOST, logger, Communication
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect(HOST)
-client = settings.Communication(sock)
+client = Communication(sock)
 # Start regular communication
 
 username = 'jnaranjo'
 password = 'test'
-client.Send(dict(ass=True))
+client.send(dict(ass=True))

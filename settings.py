@@ -14,11 +14,11 @@ HOST = (HOSTNAME, PORT)
 logger.debug('Server hostname: %s:%s' % (HOSTNAME, PORT))
 
 
-class Communicate(object):
+class Communication(object):
     def __init__(self, socket):
         self.socket = socket
 
-    def send(self, msg):
+    def send_raw(self, msg):
         '''Sends a message to the server after sending a length header'''
         length = str(len(msg)).zfill(4)
         if len(length) > 4:
@@ -38,7 +38,7 @@ class Communicate(object):
             data += more
         return data
 
-    def recv(self):
+    def recv_raw(self):
         '''Receives a message of arbitrary length.'''
         msg_length = self.recvall(4)
         if not msg_length.isdigit():
@@ -47,12 +47,12 @@ class Communicate(object):
 
         return self.recvall(msg_length)
 
-    def Send(self, obj): # Encode object in JSON then send it
+    def send(self, obj): # Encode object in JSON then send it
         obj = json.dumps(obj)
-        self.send(obj)
+        self.send_raw(obj)
 
-    def Recv(self): # Receive JSON message and decode it
-        response = self.recv()
+    def recv(self): # Receive JSON message and decode it
+        response = self.recv_raw()
         return json.loads(response)
 
 
