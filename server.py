@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 
 import socket
-import threading
+from threading import Thread
 from functools import partial
 
-import settings
-from settings import HOST, logger
+from settings import HOST, logger, Communicate
 
 SOCKET = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 SOCKET.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -14,17 +13,14 @@ SOCKET.listen(1)
 
 clients = []
 
-class Client(threading.Thread):
+class Client(Thread, Communicate):
     def __init__(self, sock, sockname):
-        threading.Thread.__init__(self)
-        self.name = sockname # override intentional
-        self.sock = sock
+        Thread.__init__(self)
+        Communicate.__init__(self, sock)
         clients.append(self)
-    
-        self.server = settings.Communication(sock)
+
     def run(self):
         logger.debug('Started connection from: %s' % self.name)
-        print self.server.recv()
 
 
 try:

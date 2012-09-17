@@ -14,7 +14,7 @@ HOST = (HOSTNAME, PORT)
 logger.debug('Server hostname: %s:%s' % (HOSTNAME, PORT))
 
 
-class Communication(object):
+class Communicate(object):
     def __init__(self, socket):
         self.socket = socket
 
@@ -46,3 +46,13 @@ class Communication(object):
         msg_length = int(msg_length)
 
         return self.recvall(msg_length)
+
+    def Send(self, obj): # Encode object in JSON then send it
+        obj = json.dumps(obj)
+        self.send(obj)
+
+    def Recv(self): # Receive JSON message and decode it
+        response = self.recv()
+        return json.loads(response)
+
+

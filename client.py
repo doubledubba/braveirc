@@ -24,4 +24,4 @@ client = settings.Communication(sock)
 
 username = 'jnaranjo'
 password = 'test'
-client.send('hai')
+client.Send(dict(ass=True))
