@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/chat.ui'
 #
-# Created: Fri Sep 14 21:59:46 2012
+# Created: Fri Sep 14 22:10:50 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -27,12 +27,12 @@ class Ui_chat(object):
         self.horizontalLayout = QtGui.QHBoxLayout(self.widget)
         self.horizontalLayout.setMargin(0)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.commandLinkButton = QtGui.QCommandLinkButton(self.widget)
-        self.commandLinkButton.setObjectName(_fromUtf8("commandLinkButton"))
-        self.horizontalLayout.addWidget(self.commandLinkButton)
-        self.commandLinkButton_3 = QtGui.QCommandLinkButton(self.widget)
-        self.commandLinkButton_3.setObjectName(_fromUtf8("commandLinkButton_3"))
-        self.horizontalLayout.addWidget(self.commandLinkButton_3)
+        self.clearButton = QtGui.QCommandLinkButton(self.widget)
+        self.clearButton.setObjectName(_fromUtf8("clearButton"))
+        self.horizontalLayout.addWidget(self.clearButton)
+        self.quitButon = QtGui.QCommandLinkButton(self.widget)
+        self.quitButon.setObjectName(_fromUtf8("quitButon"))
+        self.horizontalLayout.addWidget(self.quitButon)
         self.verticalLayout_2.addWidget(self.widget)
         self.widget_2 = QtGui.QWidget(self.centralwidget)
         self.widget_2.setObjectName(_fromUtf8("widget_2"))
@@ -59,9 +59,9 @@ class Ui_chat(object):
         self.horizontalLayout_2.addWidget(self.lineEdit)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
-        self.pushButton = QtGui.QPushButton(self.frame)
-        self.pushButton.setObjectName(_fromUtf8("pushButton"))
-        self.horizontalLayout_2.addWidget(self.pushButton)
+        self.submitButton = QtGui.QPushButton(self.frame)
+        self.submitButton.setObjectName(_fromUtf8("submitButton"))
+        self.horizontalLayout_2.addWidget(self.submitButton)
         self.verticalLayout.addWidget(self.frame)
         self.horizontalLayout_3.addWidget(self.widget_3)
         self.verticalScrollBar = QtGui.QScrollBar(self.widget_2)
@@ -89,17 +89,18 @@ class Ui_chat(object):
         self.menubar.addAction(self.menuSettings.menuAction())
 
         self.retranslateUi(chat)
-        QtCore.QObject.connect(self.commandLinkButton_3, QtCore.SIGNAL(_fromUtf8("clicked()")), chat.close)
-        QtCore.QObject.connect(self.commandLinkButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.textEdit.clear)
-        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), chat.addMsg)
-        QtCore.QObject.connect(self.lineEdit, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.pushButton.animateClick)
+        QtCore.QObject.connect(self.quitButon, QtCore.SIGNAL(_fromUtf8("clicked()")), chat.close)
+        QtCore.QObject.connect(self.clearButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.textEdit.clear)
+        QtCore.QObject.connect(self.submitButton, QtCore.SIGNAL(_fromUtf8("clicked()")), chat.addMsg)
+        QtCore.QObject.connect(self.lineEdit, QtCore.SIGNAL(_fromUtf8("returnPressed()")), self.submitButton.animateClick)
+        QtCore.QObject.connect(self.actionAbout, QtCore.SIGNAL(_fromUtf8("activated()")), chat.menu_settings)
         QtCore.QMetaObject.connectSlotsByName(chat)
 
     def retranslateUi(self, chat):
         chat.setWindowTitle(QtGui.QApplication.translate("chat", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
-        self.commandLinkButton.setText(QtGui.QApplication.translate("chat", "Clear", None, QtGui.QApplication.UnicodeUTF8))
-        self.commandLinkButton_3.setText(QtGui.QApplication.translate("chat", "Quit", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButton.setText(QtGui.QApplication.translate("chat", "Submit", None, QtGui.QApplication.UnicodeUTF8))
+        self.clearButton.setText(QtGui.QApplication.translate("chat", "Clear", None, QtGui.QApplication.UnicodeUTF8))
+        self.quitButon.setText(QtGui.QApplication.translate("chat", "Quit", None, QtGui.QApplication.UnicodeUTF8))
+        self.submitButton.setText(QtGui.QApplication.translate("chat", "Submit", None, QtGui.QApplication.UnicodeUTF8))
         self.menuSettings.setTitle(QtGui.QApplication.translate("chat", "Additional", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSettings.setText(QtGui.QApplication.translate("chat", "Settings", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbout.setText(QtGui.QApplication.translate("chat", "About", None, QtGui.QApplication.UnicodeUTF8))

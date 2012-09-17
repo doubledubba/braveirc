@@ -5,7 +5,21 @@ from PyQt4.QtGui import *
 
 from gui.chat import Ui_chat
 from gui.login import Ui_login
+from gui.msg import Ui_msg
 from client import authentic
+
+class MsgWindow(QDialog, Ui_msg): # I may just not use this.
+    def __init__(self, msg, title=None):
+        QDialog.__init__(self)
+        self.setupUi(self)
+        if not title:
+            title = 'Brave IRC'
+        else:
+            title = 'Brave IRC: %s' % title
+
+        self.label.setText(msg)
+        self.setWindowTitle(QApplication.translate("msg", title, None, QApplication.UnicodeUTF8))
+        self.exec_()
 
 
 class ChatWindow(QMainWindow, Ui_chat):
@@ -30,6 +44,8 @@ class ChatWindow(QMainWindow, Ui_chat):
 
     def menu_settings(self):
         print 'Yay menu settings!'
+        msg = MsgWindow('msg', 'title')
+        msg.show()
 
 
 class LoginWindow(QDialog, Ui_login):

@@ -19,14 +19,14 @@
      <widget class="QWidget" name="widget" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QCommandLinkButton" name="commandLinkButton">
+        <widget class="QCommandLinkButton" name="clearButton">
          <property name="text">
           <string>Clear</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QCommandLinkButton" name="commandLinkButton_3">
+        <widget class="QCommandLinkButton" name="quitButon">
          <property name="text">
           <string>Quit</string>
          </property>
@@ -74,7 +74,7 @@
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton">
+              <widget class="QPushButton" name="submitButton">
                <property name="text">
                 <string>Submit</string>
                </property>
@@ -122,19 +122,19 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionSettings">
    <property name="text">
-    <string>Settings</string>
+    <string>&amp;Settings</string>
    </property>
   </action>
   <action name="actionAbout">
    <property name="text">
-    <string>About</string>
+    <string>&amp;About</string>
    </property>
   </action>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>commandLinkButton_3</sender>
+   <sender>quitButon</sender>
    <signal>clicked()</signal>
    <receiver>chat</receiver>
    <slot>close()</slot>
@@ -150,7 +150,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>commandLinkButton</sender>
+   <sender>clearButton</sender>
    <signal>clicked()</signal>
    <receiver>textEdit</receiver>
    <slot>clear()</slot>
@@ -166,7 +166,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton</sender>
+   <sender>submitButton</sender>
    <signal>clicked()</signal>
    <receiver>chat</receiver>
    <slot>addMsg()</slot>
@@ -184,7 +184,7 @@
   <connection>
    <sender>lineEdit</sender>
    <signal>returnPressed()</signal>
-   <receiver>pushButton</receiver>
+   <receiver>submitButton</receiver>
    <slot>animateClick()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -194,6 +194,22 @@
     <hint type="destinationlabel">
      <x>544</x>
      <y>389</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAbout</sender>
+   <signal>activated()</signal>
+   <receiver>chat</receiver>
+   <slot>menu_settings()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>333</x>
+     <y>230</y>
     </hint>
    </hints>
   </connection>
