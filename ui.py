@@ -30,11 +30,11 @@ def notify(*args, **kwargs):
     print kwargs
 
 
-class Update(Thread, Communication):
+class Update(QThread, Communication):
     def __init__(self, chat):
         self.chat = chat
         self.socket = chat.client.socket
-        Thread.__init__(self)
+        QThread.__init__(self)
         Communication.__init__(self, self.socket)
 
     def run(self):
@@ -43,7 +43,8 @@ class Update(Thread, Communication):
             body = text['msg']
             print body
             line = '%s: %s' % (body['user'], body['body'])
-            self.chat.textEdit.appendPlainText(line)
+            #self.chat.textEdit.appendPlainText(line)
+            self.emit(SIGNAL('update(QString)'), line)
 
 
 
@@ -57,8 +58,9 @@ class ChatWindow(QMainWindow, Ui_chat):
         self.setupUi(self)
         self.setWindowTitle(QApplication.translate("chat", "Brave IRC Chat", None, QApplication.UnicodeUTF8))
 
-        update = Update(self)
-        update.start()
+        self.update = Update(self)
+        self.connect(self.update, SIGNAL('update(QString)'), self.printMsg)
+        self.update.start()
 
     def addMsg(self):
         text = self.lineEdit.text() # get user input
@@ -67,6 +69,9 @@ class ChatWindow(QMainWindow, Ui_chat):
         #self.textEdit.appendPlainText(text) # write user input to display
         string = {'msg': {'username': self.client.username, 'body': text}}
         self.client.send(string)
+
+    def printMsg(self, line):
+        self.textEdit.appendPlainText(line)
 
     def clear(self):
         self.textEdit.clear()
