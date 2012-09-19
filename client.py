@@ -26,4 +26,6 @@ def authentic(username, password):
     credentials = {'credentials': (username, password)}
     client.send(credentials)
     ok = client.recv()
+    if ok:
+        client.username = username
     return ok

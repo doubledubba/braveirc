@@ -1,5 +1,6 @@
 import sys
 import sqlite3
+import os
 import hashlib
 
 from PyQt4.QtCore import *
@@ -8,7 +9,10 @@ from PyQt4.QtGui import *
 from ui.composite import Ui_composite
 from ui.msg import Ui_msg
 
-conn = sqlite3.connect('braveirc.db')
+
+DB = os.path.join(os.path.dirname(__file__), 'braveirc.db')
+DB = os.path.abspath(DB)
+conn = sqlite3.connect(DB)
 cur = conn.cursor()
 cur.execute('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, '
         'username VARCHAR(255), password VARCHAR(255))')

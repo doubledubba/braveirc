@@ -15,8 +15,9 @@ logger.debug('Server hostname: %s:%s' % (HOSTNAME, PORT))
 
 
 class Communication(object):
-    def __init__(self, socket):
+    def __init__(self, socket, name=None):
         self.socket = socket
+        self.username = name
 
     def send_raw(self, msg):
         '''Sends a message to the server after sending a length header'''

@@ -12,6 +12,7 @@ SOCKET.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 SOCKET.bind(HOST)
 SOCKET.listen(1)
 
+
 clients = []
 
 class Client(Thread, Communication):
@@ -26,10 +27,19 @@ class Client(Thread, Communication):
         if not self.login():
             self.shutdown()
             return
-        print 'Yay cool stuff'
+        while True:
+            txt = self.recv()['msg']
+            print '%s: %s' % (txt['username'], txt['body'])
+            msg = txt['body']
+            for client in clients:
+                if not client.isAlive():
+                    clients.remove(client)
+                    continue
+                client.update(msg, txt['username'])
 
     def login(self):
         self.username, password = self.get('credentials')
+        print 'Logged in:', self.username
         if not self.username or not password:
             self.shutdown()
             return
@@ -40,6 +50,12 @@ class Client(Thread, Communication):
             return True
         else:
             self.send(False)
+
+    def update(self, msg, username):
+        text = {'msg': {'body': msg, 'user': username}}
+        print 'Updating:', username
+        self.send(text)
+
 
     def shutdown(self):
         logger.debug('Manually shutting down socket')
