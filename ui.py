@@ -11,9 +11,7 @@ from threading import Thread
 import socket
 from settings import Communication, HOST
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect(HOST)
-client = Communication(sock)
+
 
 
 class MsgWindow(QDialog, Ui_msg): # I may just not use this.
@@ -90,18 +88,25 @@ class ChatWindow(QMainWindow, Ui_chat):
 
 
 
-
 class LoginWindow(QDialog, Ui_login):
-    def __init__(self, client):
+    def __init__(self):
         QDialog.__init__(self)
         self.setupUi(self)
         self.setWindowTitle(QApplication.translate("login", "Brave IRC Chat", None, QApplication.UnicodeUTF8))
 
-        self.client = client
-
     def authenticate(self):
         get = lambda field: unicode(getattr(self, field).text())
         credentials = get('username'), get('password')
+        HOST = get('serverName').split(':')
+        if len(HOST) < 2:
+            HOST.append(1060)
+        HOST = tuple(HOST)
+        print HOST
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect(HOST)
+        self.client = Communication(sock)
+
+        
         if self.authentic(*credentials):
             self.mainChat = ChatWindow(self.client)
             self.mainChat.closed.connect(self.show)
@@ -122,7 +127,7 @@ class LoginWindow(QDialog, Ui_login):
 if __name__ == '__main__':
     app = QApplication(sys.argv, True)
 
-    window = LoginWindow(client)
+    window = LoginWindow()
 
     window.show()
     app.exec_()

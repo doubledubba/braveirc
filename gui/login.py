@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/login.ui'
 #
-# Created: Sat Sep 22 22:17:25 2012
+# Created: Sun Sep 23 00:11:08 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -50,9 +50,9 @@ class Ui_login(object):
         self.label_4 = QtGui.QLabel(login)
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.horizontalLayout_5.addWidget(self.label_4)
-        self.lineEdit = QtGui.QLineEdit(login)
-        self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
-        self.horizontalLayout_5.addWidget(self.lineEdit)
+        self.serverName = QtGui.QLineEdit(login)
+        self.serverName.setObjectName(_fromUtf8("serverName"))
+        self.horizontalLayout_5.addWidget(self.serverName)
         self.verticalLayout.addLayout(self.horizontalLayout_5)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))

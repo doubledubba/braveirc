@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/msg.ui'
 #
-# Created: Sat Sep 22 22:17:25 2012
+# Created: Sun Sep 23 00:11:08 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
