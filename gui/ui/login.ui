@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>346</width>
-    <height>119</height>
+    <width>426</width>
+    <height>197</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -71,6 +71,20 @@
         <enum>QLineEdit::Password</enum>
        </property>
       </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Server     </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit"/>
      </item>
     </layout>
    </item>

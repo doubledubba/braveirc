@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/login.ui'
 #
-# Created: Fri Sep 14 22:10:50 2012
+# Created: Sat Sep 22 22:17:25 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_login(object):
     def setupUi(self, login):
         login.setObjectName(_fromUtf8("login"))
-        login.resize(346, 119)
+        login.resize(426, 197)
         login.setMinimumSize(QtCore.QSize(346, 119))
         login.setMaximumSize(QtCore.QSize(433, 197))
         self.verticalLayout = QtGui.QVBoxLayout(login)
@@ -45,6 +45,15 @@ class Ui_login(object):
         self.password.setObjectName(_fromUtf8("password"))
         self.horizontalLayout_2.addWidget(self.password)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
+        self.horizontalLayout_5 = QtGui.QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(_fromUtf8("horizontalLayout_5"))
+        self.label_4 = QtGui.QLabel(login)
+        self.label_4.setObjectName(_fromUtf8("label_4"))
+        self.horizontalLayout_5.addWidget(self.label_4)
+        self.lineEdit = QtGui.QLineEdit(login)
+        self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
+        self.horizontalLayout_5.addWidget(self.lineEdit)
+        self.verticalLayout.addLayout(self.horizontalLayout_5)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.pushButton_3 = QtGui.QPushButton(login)
@@ -66,6 +75,7 @@ class Ui_login(object):
         login.setWindowTitle(QtGui.QApplication.translate("login", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("login", "Username", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("login", "Password", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("login", "Server     ", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_3.setText(QtGui.QApplication.translate("login", "OK", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_4.setText(QtGui.QApplication.translate("login", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
 

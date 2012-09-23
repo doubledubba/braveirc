@@ -6,10 +6,14 @@ from PyQt4.QtGui import *
 from gui.chat import Ui_chat
 from gui.login import Ui_login
 from gui.msg import Ui_msg
-import client
 
 from threading import Thread
-from settings import Communication
+import socket
+from settings import Communication, HOST
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.connect(HOST)
+client = Communication(sock)
 
 
 class MsgWindow(QDialog, Ui_msg): # I may just not use this.
@@ -52,8 +56,8 @@ class ChatWindow(QMainWindow, Ui_chat):
 
     closed = pyqtSignal()
 
-    def __init__(self):
-        self.client = client.client
+    def __init__(self, client):
+        self.client = client
         QMainWindow.__init__(self)
         self.setupUi(self)
         self.setWindowTitle(QApplication.translate("chat", "Brave IRC Chat", None, QApplication.UnicodeUTF8))
@@ -85,17 +89,21 @@ class ChatWindow(QMainWindow, Ui_chat):
         msg.show()
 
 
+
+
 class LoginWindow(QDialog, Ui_login):
-    def __init__(self):
+    def __init__(self, client):
         QDialog.__init__(self)
         self.setupUi(self)
         self.setWindowTitle(QApplication.translate("login", "Brave IRC Chat", None, QApplication.UnicodeUTF8))
 
+        self.client = client
+
     def authenticate(self):
         get = lambda field: unicode(getattr(self, field).text())
         credentials = get('username'), get('password')
-        if client.authentic(*credentials):
-            self.mainChat = ChatWindow()
+        if self.authentic(*credentials):
+            self.mainChat = ChatWindow(self.client)
             self.mainChat.closed.connect(self.show)
             self.mainChat.show()
             self.hide()
@@ -103,10 +111,18 @@ class LoginWindow(QDialog, Ui_login):
             notify('Authenticated failed!', 'Hmmmm...')
             self.close()
 
+    def authentic(self, username, password):
+        credentials = {'credentials': (username, password)}
+        self.client.send(credentials)
+        ok = self.client.recv()
+        if ok:
+            self.client.username = username
+        return ok
+
 if __name__ == '__main__':
     app = QApplication(sys.argv, True)
 
-    window = LoginWindow()
+    window = LoginWindow(client)
 
     window.show()
     app.exec_()

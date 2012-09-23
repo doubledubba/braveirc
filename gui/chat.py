@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/chat.ui'
 #
-# Created: Fri Sep 14 22:10:50 2012
+# Created: Sat Sep 22 22:17:25 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -102,6 +102,6 @@ class Ui_chat(object):
         self.quitButon.setText(QtGui.QApplication.translate("chat", "Quit", None, QtGui.QApplication.UnicodeUTF8))
         self.submitButton.setText(QtGui.QApplication.translate("chat", "Submit", None, QtGui.QApplication.UnicodeUTF8))
         self.menuSettings.setTitle(QtGui.QApplication.translate("chat", "Additional", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionSettings.setText(QtGui.QApplication.translate("chat", "Settings", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionAbout.setText(QtGui.QApplication.translate("chat", "About", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSettings.setText(QtGui.QApplication.translate("chat", "&Settings", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAbout.setText(QtGui.QApplication.translate("chat", "&About", None, QtGui.QApplication.UnicodeUTF8))
 

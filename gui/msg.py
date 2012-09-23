@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/msg.ui'
 #
-# Created: Fri Sep 14 22:10:50 2012
+# Created: Sat Sep 22 22:17:25 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -38,6 +38,7 @@ class Ui_msg(object):
         self.verticalLayout.addWidget(self.pushButton)
 
         self.retranslateUi(msg)
+        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), msg.close)
         QtCore.QMetaObject.connectSlotsByName(msg)
 
     def retranslateUi(self, msg):
