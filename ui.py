@@ -9,7 +9,7 @@ from gui.msg import Ui_msg
 
 from threading import Thread
 import socket
-from settings import Communication, HOST
+from settings import Communication, HOST, logger
 
 
 
@@ -43,9 +43,8 @@ class Update(QThread, Communication):
         while True:
             text = self.recv()
             body = text['msg']
-            print body
-            line = '%s: %s' % (body['user'], body['body'])
-            #self.chat.textEdit.appendPlainText(line)
+            line = '%s (%s): %s' % (body['user'], body['time'], body['body'])
+            logger.info(line)
             self.emit(SIGNAL('update(QString)'), line)
 
 
@@ -109,11 +108,13 @@ class LoginWindow(QDialog, Ui_login):
 
         
         if self.authentic(*credentials):
+            logger.info('Succesfully logged in')
             self.mainChat = ChatWindow(self.client)
             self.mainChat.closed.connect(self.show)
             self.mainChat.show()
             self.hide()
         else:
+            logger.info('Login failed')
             notify('Authenticated failed!', 'Hmmmm...')
             self.close()
 

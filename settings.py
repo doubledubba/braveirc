@@ -4,7 +4,7 @@ import json
 import logging
 
 logging.basicConfig(format='[%(levelname)s] [%(asctime)s]: %(message)s',
-        level=logging.DEBUG)
+        level=logging.INFO)
 logger = logging.getLogger()
 
 arg = lambda i, default: sys.argv[i] if len(sys.argv) > i else default
@@ -48,11 +48,8 @@ class Communication(object):
         return self.recvall(msg_length)
 
     def send(self, obj): # Encode object in JSON then send it
-        if obj is not None:
-            obj = json.dumps(obj)
-            self.send_raw(obj)
-        else:
-            print 'send method did not get an object to send!'
+        obj = json.dumps(obj)
+        self.send_raw(obj)
 
     def recv(self): # Receive JSON message and decode it
         response = self.recv_raw()
