@@ -100,8 +100,9 @@ class LoginWindow(QDialog, Ui_login):
         HOST = get('serverName').split(':')
         if len(HOST) < 2:
             HOST.append(1060)
+        else:
+            HOST[1] = int(HOST[1])
         HOST = tuple(HOST)
-        print HOST
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect(HOST)
         self.client = Communication(sock)
