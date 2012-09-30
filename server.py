@@ -65,7 +65,7 @@ class Client(Thread, Communication):
 
     def update(self, msg, username):
         text = {'msg': {'body': msg, 'user': username, 'time':
-            datetime.now().strftime('%c')}}
+            datetime.now().strftime('%I:%M %P')}}
         self.send(text)
 
 
