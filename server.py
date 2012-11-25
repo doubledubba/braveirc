@@ -73,12 +73,17 @@ class Client(Thread, Communication):
         logger.info('Logged off: %s' % self.username)
         self.socket.close()
 
-try:
-    while True:
-        connection = SOCKET.accept()
-        client = Client(*connection)
-        client.start()
-except KeyboardInterrupt:
-    print('Exiting server')
+
+def main():
+    try:
+        while True:
+            connection = SOCKET.accept()
+            client = Client(*connection)
+            client.start()
+    except KeyboardInterrupt:
+        print('Exiting server')
+
+if __name__ == '__main__':
+    main()
 
 print clients
