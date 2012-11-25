@@ -1,10 +1,10 @@
 binary:
-	pyinstaller.py -F -o bin/ --upx-dir=bin/ ui.py
+	pyinstaller/pyinstaller.py -F -o bin/ --upx-dir=bin/ ui.py
 	rm *.log
-clean:
+	mv bin/dist/ui bin/
 	rm -Rf bin/build bin/dist bin/ui.spec
 all:
 	cd gui;make
 	cd db;make
-	make bin
+	make binary
 
